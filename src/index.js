@@ -25,12 +25,11 @@ const reviews = [
 
 
 const renderReviewsContainer = (reviews) => {
-  // اختيار قسم المراجعات
+  
   const reviewsSection = document.querySelector('.reviews');
-  // حفظ عنوان القسم
+  
   const headerHTML = '<h3>Reviews</h3>';
 
-  // التحقق من وجود عنصر container للمراجعات، وإنشاؤه إن لم يكن موجوداً
   let reviewsContainer = reviewsSection.querySelector('.reviews_container');
   if (!reviewsContainer) {
     reviewsSection.innerHTML = headerHTML;
@@ -38,11 +37,10 @@ const renderReviewsContainer = (reviews) => {
     reviewsContainer.classList.add('reviews_container');
     reviewsSection.appendChild(reviewsContainer);
   } else {
-    // delete
+    
     reviewsContainer.innerHTML = '';
   }
   
-  // تكرار عرض كل مراجعة
   reviews.forEach((review) => {
     const reviewContainer = document.createElement('div');
     reviewContainer.classList.add('review_container');
@@ -57,39 +55,36 @@ const renderReviewsContainer = (reviews) => {
     reviewsContainer.appendChild(reviewContainer);
   });
 
-  // تحديث متوسط تقييم النجوم باستخدام الدالة المساعدة
   const avgRating = calculateStarAverage(reviews);
   const starRatingElement = document.querySelector('.starRating');
   starRatingElement.textContent = `Star Rating: ${avgRating.toFixed(1)}`;
 };
 
-// العرض الأول للمراجعات
+
 renderReviewsContainer(reviews);
 
-// التعامل مع إرسال النموذج
 const form = document.querySelector('form');
 form.addEventListener('submit', (e) => {
   e.preventDefault();
-  
-  // استخراج القيم من النموذج
+ 
   const username = document.querySelector('#username').value;
   const image = document.querySelector('#image').value;
   const star = document.querySelector('#star').value;
   const reviewText = document.querySelector('#review').value;
 
-  // إنشاء كائن للمراجعة الجديدة
+  
   const newReview = {
     username,
     image,
-    star: parseInt(star), // تحويل قيمة النجوم إلى رقم
+    star: parseInt(star), 
     review: reviewText,
   };
 
-  // إضافة المراجعة الجديدة إلى مجموعة المراجعات
+ 
   reviews.push(newReview);
-  // إعادة عرض المراجعات مع التحديث
+ 
   renderReviewsContainer(reviews);
-  // إعادة تعيين النموذج
+ 
   form.reset();
 });
 
